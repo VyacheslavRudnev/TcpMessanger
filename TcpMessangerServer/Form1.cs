@@ -38,6 +38,10 @@ namespace TcpMessangerServer
                     sendReq.Path = "message";
                     sendReq.Data = Encoding.UTF8.GetBytes(auditMessage);
                     break;
+                case "error":
+                    string errorMessage = Encoding.UTF8.GetString(request.Data);
+                    auditMessage = $"Error: {errorMessage}";
+                    break;
             }
 
             this.Invoke(() => audit.Items.Add(auditMessage));
@@ -46,7 +50,14 @@ namespace TcpMessangerServer
 
         private void button1_Click(object sender, EventArgs e)
         {
-            _serverManager.Connect("127.0.0.1", 4545);
+            try
+            {
+                _serverManager.Connect("127.0.0.1", 4545);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка старту сервера: {ex.Message}");
+            }
         }
     }
 }

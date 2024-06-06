@@ -22,6 +22,9 @@ namespace TcpMessanger
                 case "message":
                     message = Encoding.UTF8.GetString(request.Data);
                     break;
+                case "error":
+                    message = $"Error: {Encoding.UTF8.GetString(request.Data)}";
+                    break;
             }
 
             this.Invoke(() => listBox.Items.Add(message));
@@ -29,17 +32,36 @@ namespace TcpMessanger
 
         private void connectBtn_Click(object sender, EventArgs e)
         {
-            _tcpManager.Connect(addressTb.Text.Trim(), int.Parse(portTb.Text.Trim()));
-            Request request = new Request()
+            if (string.IsNullOrWhiteSpace(addressTb.Text) || string.IsNullOrWhiteSpace(portTb.Text) || string.IsNullOrWhiteSpace(nameTb.Text))
             {
-                Path = "login",
-                Data = Encoding.UTF8.GetBytes(nameTb.Text.Trim())
-            };
-            _tcpManager.Send(request);
+                MessageBox.Show("Заповніть всі поля.");
+                return;
+            }
+
+            try
+            {
+                _tcpManager.Connect(addressTb.Text.Trim(), int.Parse(portTb.Text.Trim()));
+                Request request = new Request()
+                {
+                    Path = "login",
+                    Data = Encoding.UTF8.GetBytes(nameTb.Text.Trim())
+                };
+                _tcpManager.Send(request);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка підключення: {ex.Message}");
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(messageTb.Text))
+            {
+                MessageBox.Show("Введіть ваше повідомлення.");
+                return;
+            }
+
             Request request = new Request()
             {
                 Path = "message",

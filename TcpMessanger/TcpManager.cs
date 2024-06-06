@@ -18,21 +18,37 @@ public class TcpManager
 
     public void Connect(string address, int port)
     {
-        _client = new TcpClient();
-        _client.Connect(IPAddress.Parse("127.0.0.1"), 4545);
-        _stream = _client.GetStream();
-        Thread thread = new Thread(Listen);
-        thread.IsBackground = true;
-        thread.Start();
+        try
+        {
+            _client = new TcpClient();
+            _client.Connect(IPAddress.Parse("127.0.0.1"), 4545);
+            _stream = _client.GetStream();
+            Thread thread = new Thread(Listen);
+            thread.IsBackground = true;
+            thread.Start();
+        }
+        catch(Exception ex)
+        {
+            MessageBox.Show($"Помилка підключення до серверу: {ex.Message}");
+        }        
     }
 
-    public void Send(Request request) {
-        _stream = _client.GetStream();
-        MemoryStream memoryStream = new MemoryStream();
-        _formatter.Serialize(memoryStream, request);
-        byte[] buffer = memoryStream.ToArray();
-        _stream.Write(buffer, 0, buffer.Length);
-        _stream.Flush();
+    public void Send(Request request) 
+    {
+        try
+        {
+            _stream = _client.GetStream();
+            MemoryStream memoryStream = new MemoryStream();
+            _formatter.Serialize(memoryStream, request);
+            byte[] buffer = memoryStream.ToArray();
+            _stream.Write(buffer, 0, buffer.Length);
+            _stream.Flush();
+        }
+        catch(Exception ex)
+        {
+            MessageBox.Show($"Помилка відправлення даних: {ex.Message}");
+        }
+        
     }
 
     private void Listen()
@@ -40,12 +56,19 @@ public class TcpManager
         StreamReader streamReader;
         while(true)
         {
-            if (_stream == null) continue;
-            streamReader = new StreamReader(_stream);
-            if (_stream.DataAvailable)
+            try
             {
-                Request request = (Request)_formatter.Deserialize(streamReader.BaseStream);
-                Received?.Invoke(request);
+                if (_stream == null) continue;
+                streamReader = new StreamReader(_stream);
+                if (_stream.DataAvailable)
+                {
+                    Request request = (Request)_formatter.Deserialize(streamReader.BaseStream);
+                    Received?.Invoke(request);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Помилка отримання даних: {ex.Message}");
             }
         }
     }

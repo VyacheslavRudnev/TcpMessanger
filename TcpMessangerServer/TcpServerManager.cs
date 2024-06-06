@@ -20,13 +20,20 @@ public class TcpServerManager
 
     public void Connect(string address, int port)
     {
-        _address = IPAddress.Parse(address);
-        _port = port;
-        _listener = new TcpListener(_address, _port);
-        _listener.Start();
-        Thread thread = new Thread(Listen);
-        thread.IsBackground = true;
-        thread.Start();
+        try
+        {
+            _address = IPAddress.Parse(address);
+            _port = port;
+            _listener = new TcpListener(_address, _port);
+            _listener.Start();
+            Thread thread = new Thread(Listen);
+            thread.IsBackground = true;
+            thread.Start();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
     }
 
     public void Send(Request request)
@@ -39,23 +46,37 @@ public class TcpServerManager
 
     private void Send(Request request, TcpClient client)
     {
-        NetworkStream stream = client.GetStream();
-        MemoryStream memoryStream = new MemoryStream();
-        _formatter.Serialize(memoryStream, request);
-        byte[] buffer = memoryStream.ToArray();
-        stream.Write(buffer, 0, buffer.Length);
-        stream.Flush();
+        try
+        {
+            NetworkStream stream = client.GetStream();
+            MemoryStream memoryStream = new MemoryStream();
+            _formatter.Serialize(memoryStream, request);
+            byte[] buffer = memoryStream.ToArray();
+            stream.Write(buffer, 0, buffer.Length);
+            stream.Flush();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Помилка відправлення даних: {ex.Message}");
+        }
     }
 
     private void Listen()
     {
         while (true)
         {
-            TcpClient client = _listener.AcceptTcpClient();
+            try
+            {
+                TcpClient client = _listener.AcceptTcpClient();
 
-            Thread thread = new Thread(() => ListenClient(client));
-            thread.IsBackground = true;
-            thread.Start();
+                Thread thread = new Thread(() => ListenClient(client));
+                thread.IsBackground = true;
+                thread.Start();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка підключення клієнта: {ex.Message}");
+            }
         }
     }
 
@@ -66,18 +87,25 @@ public class TcpServerManager
 
         while (true)
         {
-            streamReader = new StreamReader(stream);
-            if (stream.DataAvailable)
+            try
             {
-                Request request = (Request)_formatter.Deserialize(streamReader.BaseStream);
-
-                if (request.Path == "login")
+                streamReader = new StreamReader(stream);
+                if (stream.DataAvailable)
                 {
-                    string username = Encoding.UTF8.GetString(request.Data);
-                    _clients.Add(username, client);
-                }
+                    Request request = (Request)_formatter.Deserialize(streamReader.BaseStream);
 
-                Received?.Invoke(request);
+                    if (request.Path == "login")
+                    {
+                        string username = Encoding.UTF8.GetString(request.Data);
+                        _clients.Add(username, client);
+                    }
+
+                    Received?.Invoke(request);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Помилка обробки даних клієнта: {ex.Message}");
             }
         }
     }
