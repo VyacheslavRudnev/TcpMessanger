@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            button2 = new Button();
             button1 = new Button();
             messageTb = new TextBox();
             listBox = new ListBox();
@@ -41,7 +43,6 @@
             label2 = new Label();
             addressTb = new TextBox();
             label1 = new Label();
-            button2 = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -52,32 +53,49 @@
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Dock = DockStyle.Fill;
+            tabControl1.ItemSize = new Size(120, 35);
             tabControl1.Location = new Point(0, 0);
+            tabControl1.Margin = new Padding(2);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1268, 690);
+            tabControl1.Size = new Size(1014, 552);
+            tabControl1.SizeMode = TabSizeMode.Fixed;
             tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            tabPage1.BackColor = SystemColors.ActiveCaption;
             tabPage1.Controls.Add(button2);
             tabPage1.Controls.Add(button1);
             tabPage1.Controls.Add(messageTb);
             tabPage1.Controls.Add(listBox);
-            tabPage1.Location = new Point(4, 34);
+            tabPage1.Location = new Point(4, 39);
+            tabPage1.Margin = new Padding(2);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1260, 652);
+            tabPage1.Padding = new Padding(2);
+            tabPage1.Size = new Size(1006, 509);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Messanger";
-            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Font = new Font("Segoe UI", 12F);
+            button2.Location = new Point(826, 430);
+            button2.Margin = new Padding(2);
+            button2.Name = "button2";
+            button2.Size = new Size(156, 40);
+            button2.TabIndex = 2;
+            button2.Text = "Send file";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button1
             // 
             button1.Font = new Font("Segoe UI", 12F);
-            button1.Location = new Point(1033, 482);
+            button1.Location = new Point(826, 386);
+            button1.Margin = new Padding(2);
             button1.Name = "button1";
-            button1.Size = new Size(195, 50);
+            button1.Size = new Size(156, 40);
             button1.TabIndex = 2;
             button1.Text = "Send";
             button1.UseVisualStyleBackColor = true;
@@ -86,23 +104,26 @@
             // messageTb
             // 
             messageTb.Font = new Font("Segoe UI", 16F);
-            messageTb.Location = new Point(26, 482);
+            messageTb.Location = new Point(21, 386);
+            messageTb.Margin = new Padding(2);
             messageTb.Name = "messageTb";
-            messageTb.Size = new Size(973, 50);
+            messageTb.Size = new Size(779, 43);
             messageTb.TabIndex = 1;
             // 
             // listBox
             // 
             listBox.Font = new Font("Segoe UI", 14F);
             listBox.FormattingEnabled = true;
-            listBox.ItemHeight = 38;
-            listBox.Location = new Point(26, 28);
+            listBox.ItemHeight = 31;
+            listBox.Location = new Point(21, 22);
+            listBox.Margin = new Padding(2);
             listBox.Name = "listBox";
-            listBox.Size = new Size(1202, 308);
+            listBox.Size = new Size(962, 221);
             listBox.TabIndex = 0;
             // 
             // tabPage2
             // 
+            tabPage2.BackColor = SystemColors.ActiveCaption;
             tabPage2.Controls.Add(connectBtn);
             tabPage2.Controls.Add(nameTb);
             tabPage2.Controls.Add(label3);
@@ -110,49 +131,62 @@
             tabPage2.Controls.Add(label2);
             tabPage2.Controls.Add(addressTb);
             tabPage2.Controls.Add(label1);
-            tabPage2.Location = new Point(4, 34);
+            tabPage2.Location = new Point(4, 39);
+            tabPage2.Margin = new Padding(2);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1260, 652);
+            tabPage2.Padding = new Padding(2);
+            tabPage2.Size = new Size(1006, 509);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Settings";
-            tabPage2.UseVisualStyleBackColor = true;
             // 
             // connectBtn
             // 
-            connectBtn.Font = new Font("Segoe UI", 16F);
-            connectBtn.Location = new Point(106, 281);
+            connectBtn.BackColor = Color.RoyalBlue;
+            connectBtn.Enabled = false;
+            connectBtn.FlatAppearance.BorderColor = Color.Black;
+            connectBtn.FlatAppearance.BorderSize = 0;
+            connectBtn.FlatAppearance.MouseDownBackColor = Color.Navy;
+            connectBtn.FlatAppearance.MouseOverBackColor = Color.RoyalBlue;
+            connectBtn.FlatStyle = FlatStyle.Popup;
+            connectBtn.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            connectBtn.ForeColor = SystemColors.ButtonHighlight;
+            connectBtn.Location = new Point(85, 225);
+            connectBtn.Margin = new Padding(2);
             connectBtn.Name = "connectBtn";
-            connectBtn.Size = new Size(253, 71);
+            connectBtn.Size = new Size(202, 57);
             connectBtn.TabIndex = 2;
             connectBtn.Text = "Connect";
-            connectBtn.UseVisualStyleBackColor = true;
+            connectBtn.UseVisualStyleBackColor = false;
             connectBtn.Click += connectBtn_Click;
             // 
             // nameTb
             // 
             nameTb.Font = new Font("Segoe UI", 16F);
-            nameTb.Location = new Point(208, 176);
+            nameTb.Location = new Point(166, 141);
+            nameTb.Margin = new Padding(2);
             nameTb.Name = "nameTb";
-            nameTb.Size = new Size(285, 50);
+            nameTb.Size = new Size(229, 43);
             nameTb.TabIndex = 1;
+            nameTb.TextChanged += textBox_TextChanged;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 16F);
-            label3.Location = new Point(18, 176);
+            label3.Location = new Point(14, 141);
+            label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(163, 45);
+            label3.Size = new Size(136, 37);
             label3.TabIndex = 0;
             label3.Text = "Username";
             // 
             // portTb
             // 
             portTb.Font = new Font("Segoe UI", 16F);
-            portTb.Location = new Point(208, 98);
+            portTb.Location = new Point(166, 78);
+            portTb.Margin = new Padding(2);
             portTb.Name = "portTb";
-            portTb.Size = new Size(285, 50);
+            portTb.Size = new Size(229, 43);
             portTb.TabIndex = 1;
             portTb.Text = "4545";
             // 
@@ -160,18 +194,20 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 16F);
-            label2.Location = new Point(18, 98);
+            label2.Location = new Point(14, 78);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(78, 45);
+            label2.Size = new Size(65, 37);
             label2.TabIndex = 0;
             label2.Text = "Port";
             // 
             // addressTb
             // 
             addressTb.Font = new Font("Segoe UI", 16F);
-            addressTb.Location = new Point(208, 26);
+            addressTb.Location = new Point(166, 21);
+            addressTb.Margin = new Padding(2);
             addressTb.Name = "addressTb";
-            addressTb.Size = new Size(285, 50);
+            addressTb.Size = new Size(229, 43);
             addressTb.TabIndex = 1;
             addressTb.Text = "127.0.0.1";
             // 
@@ -179,30 +215,23 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 16F);
-            label1.Location = new Point(18, 26);
+            label1.Location = new Point(14, 21);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(171, 45);
+            label1.Size = new Size(140, 37);
             label1.TabIndex = 0;
             label1.Text = "IP Address";
             // 
-            // button2
-            // 
-            button2.Font = new Font("Segoe UI", 12F);
-            button2.Location = new Point(1033, 538);
-            button2.Name = "button2";
-            button2.Size = new Size(195, 50);
-            button2.TabIndex = 2;
-            button2.Text = "Send file";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
-            // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1268, 690);
+            ClientSize = new Size(1014, 552);
             Controls.Add(tabControl1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(2);
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "TCP Messanger";
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);

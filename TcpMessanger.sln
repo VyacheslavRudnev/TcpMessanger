@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpMessanger", "TcpMessanger\TcpMessanger.csproj", "{0065C644-498A-4BD3-9E3E-85ABA243F44B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcpMessanger", "TcpMessanger\TcpMessanger.csproj", "{0065C644-498A-4BD3-9E3E-85ABA243F44B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Networking", "Networking\Networking.csproj", "{925A6006-40E1-4811-939E-72D16C4ECE6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Networking", "Networking\Networking.csproj", "{925A6006-40E1-4811-939E-72D16C4ECE6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpMessangerServer", "TcpMessangerServer\TcpMessangerServer.csproj", "{B7E94F77-0660-4DCE-9653-3C63B90C8984}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcpMessangerServer", "TcpMessangerServer\TcpMessangerServer.csproj", "{B7E94F77-0660-4DCE-9653-3C63B90C8984}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

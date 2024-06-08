@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             audit = new ListBox();
             button1 = new Button();
             SuspendLayout();
@@ -36,18 +37,20 @@
             // 
             audit.Font = new Font("Segoe UI", 12F);
             audit.FormattingEnabled = true;
-            audit.ItemHeight = 32;
-            audit.Location = new Point(12, 133);
+            audit.ItemHeight = 28;
+            audit.Location = new Point(10, 106);
+            audit.Margin = new Padding(2);
             audit.Name = "audit";
-            audit.Size = new Size(1206, 516);
+            audit.Size = new Size(966, 396);
             audit.TabIndex = 0;
             // 
             // button1
             // 
             button1.Font = new Font("Segoe UI", 14F);
-            button1.Location = new Point(18, 17);
+            button1.Location = new Point(14, 14);
+            button1.Margin = new Padding(2);
             button1.Name = "button1";
-            button1.Size = new Size(307, 63);
+            button1.Size = new Size(246, 50);
             button1.TabIndex = 1;
             button1.Text = "Start Server";
             button1.UseVisualStyleBackColor = true;
@@ -55,12 +58,16 @@
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1230, 674);
+            BackColor = Color.LightBlue;
+            ClientSize = new Size(984, 539);
             Controls.Add(button1);
             Controls.Add(audit);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(2);
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Server";
             ResumeLayout(false);
         }

@@ -63,22 +63,44 @@ public class TcpServerManager
     {
         NetworkStream stream = client.GetStream();
         StreamReader streamReader;
-
-        while (true)
+        try
         {
-            streamReader = new StreamReader(stream);
-            if (stream.DataAvailable)
+            while (true)
             {
-                Request request = (Request)_formatter.Deserialize(streamReader.BaseStream);
-
-                if (request.Path == "login")
+                streamReader = new StreamReader(stream);
+                if (stream.DataAvailable)
                 {
-                    string username = Encoding.UTF8.GetString(request.Data);
-                    _clients.Add(username, client);
-                }
+                    Request request = (Request)_formatter.Deserialize(streamReader.BaseStream);
 
-                Received?.Invoke(request);
+                    if (request.Path == "login")
+                    {
+                        string username = Encoding.UTF8.GetString(request.Data);
+                        if (_clients.ContainsKey(username))
+                        {
+                            Request response = new Request()
+                            {
+                                Path = "error",
+                                Data = Encoding.UTF8.GetBytes("Таке ім'я вже використовується")
+                            };
+                            Send(response, client);
+                        }
+                        else
+                        {
+                            _clients.Add(username, client);
+                            Received?.Invoke(request);
+                        }
+                    }
+                    else
+                    {
+                        Received?.Invoke(request);
+                    }
+                }
             }
         }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Помилка обробки даних: {ex.Message}");
+        }
+        
     }
 }

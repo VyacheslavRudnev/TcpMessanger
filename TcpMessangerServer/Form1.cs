@@ -28,7 +28,7 @@ namespace TcpMessangerServer
                 case "message":
                     string message = Encoding.UTF8.GetString(request.Data);
                     sendReq.Path = "message";
-                    auditMessage = message;
+                    auditMessage = $" {request.UserName.Trim()} :  {message} ({DateTime.Now.ToShortTimeString()})";
                     sendReq.Data = Encoding.UTF8.GetBytes(auditMessage);
                     break;
                 case "file":
@@ -38,10 +38,21 @@ namespace TcpMessangerServer
                     sendReq.Path = "message";
                     sendReq.Data = Encoding.UTF8.GetBytes(auditMessage);
                     break;
+                case "error":
+                    string errorMessage = Encoding.UTF8.GetString(request.Data);
+                    auditMessage = $"Error: {errorMessage}";
+                    break;
             }
 
             this.Invoke(() => audit.Items.Add(auditMessage));
-            _serverManager.Send(sendReq);
+            if(sendReq.Path != "error")
+               _serverManager.Send(sendReq);
+        }
+
+        private string GetNameFromRequest(Request request)
+        {
+            string name = Encoding.UTF8.GetString(request.Data);
+            return name;
         }
 
         private void button1_Click(object sender, EventArgs e)
