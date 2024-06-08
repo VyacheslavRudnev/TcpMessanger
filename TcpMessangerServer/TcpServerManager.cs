@@ -83,11 +83,24 @@ public class TcpServerManager
                                 Data = Encoding.UTF8.GetBytes("Таке ім'я вже використовується")
                             };
                             Send(response, client);
+                            client.Close();
+                            return;
                         }
                         else
                         {
                             _clients.Add(username, client);
                             Received?.Invoke(request);
+                        }
+                    }
+                    else if (request.Path == "logout")
+                    {
+                        string username = Encoding.UTF8.GetString(request.Data);
+                        if (_clients.ContainsKey(username))
+                        {
+                            _clients.Remove(username);
+                            Received?.Invoke(request);
+                            client.Close();
+                            return;
                         }
                     }
                     else
@@ -102,5 +115,16 @@ public class TcpServerManager
             Console.WriteLine($"Помилка обробки даних: {ex.Message}");
         }
         
+    }
+
+    public void Disconnect()
+    {
+        foreach (var client in _clients.Values)
+        {
+            client.Close();
+        }
+        _clients.Clear();
+
+        _listener.Stop();
     }
 }

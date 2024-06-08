@@ -43,6 +43,7 @@
             label2 = new Label();
             addressTb = new TextBox();
             label1 = new Label();
+            button3 = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -79,6 +80,7 @@
             // 
             // button2
             // 
+            button2.FlatStyle = FlatStyle.Popup;
             button2.Font = new Font("Segoe UI", 12F);
             button2.Location = new Point(826, 430);
             button2.Margin = new Padding(2);
@@ -91,6 +93,7 @@
             // 
             // button1
             // 
+            button1.FlatStyle = FlatStyle.Popup;
             button1.Font = new Font("Segoe UI", 12F);
             button1.Location = new Point(826, 386);
             button1.Margin = new Padding(2);
@@ -124,6 +127,7 @@
             // tabPage2
             // 
             tabPage2.BackColor = SystemColors.ActiveCaption;
+            tabPage2.Controls.Add(button3);
             tabPage2.Controls.Add(connectBtn);
             tabPage2.Controls.Add(nameTb);
             tabPage2.Controls.Add(label3);
@@ -141,7 +145,7 @@
             // 
             // connectBtn
             // 
-            connectBtn.BackColor = Color.RoyalBlue;
+            connectBtn.BackColor = SystemColors.ActiveCaption;
             connectBtn.Enabled = false;
             connectBtn.FlatAppearance.BorderColor = Color.Black;
             connectBtn.FlatAppearance.BorderSize = 0;
@@ -150,10 +154,10 @@
             connectBtn.FlatStyle = FlatStyle.Popup;
             connectBtn.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
             connectBtn.ForeColor = SystemColors.ButtonHighlight;
-            connectBtn.Location = new Point(85, 225);
+            connectBtn.Location = new Point(166, 223);
             connectBtn.Margin = new Padding(2);
             connectBtn.Name = "connectBtn";
-            connectBtn.Size = new Size(202, 57);
+            connectBtn.Size = new Size(229, 51);
             connectBtn.TabIndex = 2;
             connectBtn.Text = "Connect";
             connectBtn.UseVisualStyleBackColor = false;
@@ -222,6 +226,19 @@
             label1.TabIndex = 0;
             label1.Text = "IP Address";
             // 
+            // button3
+            // 
+            button3.FlatStyle = FlatStyle.Popup;
+            button3.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            button3.ForeColor = SystemColors.ButtonHighlight;
+            button3.Location = new Point(166, 298);
+            button3.Name = "button3";
+            button3.Size = new Size(229, 53);
+            button3.TabIndex = 3;
+            button3.Text = "Disconnect";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -257,5 +274,6 @@
         private TextBox messageTb;
         private Button button1;
         private Button button2;
+        private Button button3;
     }
 }

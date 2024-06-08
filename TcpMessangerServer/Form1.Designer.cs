@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             audit = new ListBox();
             button1 = new Button();
+            button2 = new Button();
             SuspendLayout();
             // 
             // audit
@@ -46,6 +47,8 @@
             // 
             // button1
             // 
+            button1.BackColor = Color.GhostWhite;
+            button1.FlatStyle = FlatStyle.Popup;
             button1.Font = new Font("Segoe UI", 14F);
             button1.Location = new Point(14, 14);
             button1.Margin = new Padding(2);
@@ -53,15 +56,29 @@
             button1.Size = new Size(246, 50);
             button1.TabIndex = 1;
             button1.Text = "Start Server";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.GhostWhite;
+            button2.FlatStyle = FlatStyle.Popup;
+            button2.Font = new Font("Segoe UI", 16F);
+            button2.Location = new Point(726, 18);
+            button2.Name = "button2";
+            button2.Size = new Size(246, 50);
+            button2.TabIndex = 2;
+            button2.Text = "Stop Server";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.LightBlue;
+            BackColor = Color.Lavender;
             ClientSize = new Size(984, 539);
+            Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(audit);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -76,5 +93,6 @@
 
         private ListBox audit;
         private Button button1;
+        private Button button2;
     }
 }

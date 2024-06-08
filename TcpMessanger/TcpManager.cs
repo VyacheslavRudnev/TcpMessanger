@@ -49,4 +49,16 @@ public class TcpManager
             }
         }
     }
+
+    public void Disconnect()
+    {
+        if (_stream != null)
+        {
+            _stream.Close();
+        }
+        if (_client != null)
+        {
+            _client.Close();
+        }
+    }
 }
